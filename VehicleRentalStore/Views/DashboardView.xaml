@@ -4,12 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="600"
+    d:DesignWidth="1000"
     mc:Ignorable="d">
 
     <Grid Margin="20" Background="{DynamicResource AppBackgroundBrush}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -20,40 +21,89 @@
             FontSize="24"
             FontWeight="Bold"
             Foreground="{DynamicResource TextHighBrush}"
-            Text="Ajoneuvokanta (Fleet)" />
+            Text="Admin Overview" />
 
-        <DataGrid
-            Grid.Row="1"
-            AutoGenerateColumns="False"
-            IsReadOnly="True"
-            ItemsSource="{Binding Fleet}"
-            Style="{StaticResource {x:Type DataGrid}}">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Brand}"
-                    Header="Brand" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Model}"
-                    Header="Model" />
-                <DataGridTextColumn
-                    Width="80"
-                    Binding="{Binding ManufactureYear}"
-                    Header="Year" />
-                <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding LicensePlate}"
-                    Header="License Plate" />
-                <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding DailyRate, StringFormat={}{0:F2}}"
-                    Header="Daily Rate (€)" />
-                <DataGridTextColumn
-                    Width="120"
-                    Binding="{Binding CurrentOdometerKm}"
-                    Header="Odometer (km)" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="0,0,10,0" Padding="15" Style="{StaticResource BorderStyle}">
+                <StackPanel>
+                    <TextBlock Foreground="{DynamicResource TextMutedBrush}" Text="Total Revenue" FontSize="14" />
+                    <TextBlock Foreground="{DynamicResource TextHighBrush}" Text="{Binding TotalLifetimeRevenue, StringFormat={}{0:C}}" FontSize="24" FontWeight="SemiBold" Margin="0,5,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="1" Margin="5,0,5,0" Padding="15" Style="{StaticResource BorderStyle}">
+                <StackPanel>
+                    <TextBlock Foreground="{DynamicResource TextMutedBrush}" Text="Active Rentals" FontSize="14" />
+                    <TextBlock Foreground="{DynamicResource TextHighBrush}" Text="{Binding ActiveRentalsCount}" FontSize="24" FontWeight="SemiBold" Margin="0,5,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Margin="5,0,5,0" Padding="15" Style="{StaticResource BorderStyle}">
+                <StackPanel>
+                    <TextBlock Foreground="{DynamicResource TextMutedBrush}" Text="Registered Customers" FontSize="14" />
+                    <TextBlock Foreground="{DynamicResource TextHighBrush}" Text="{Binding TotalCustomers}" FontSize="24" FontWeight="SemiBold" Margin="0,5,0,0" />
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="3" Margin="10,0,0,0" Padding="15" Style="{StaticResource BorderStyle}">
+                <StackPanel>
+                    <TextBlock Foreground="{DynamicResource TextMutedBrush}" Text="Total Fleet Size" FontSize="14" />
+                    <TextBlock Foreground="{DynamicResource TextHighBrush}" Text="{Binding TotalVehicles}" FontSize="24" FontWeight="SemiBold" Margin="0,5,0,0" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="0,0,10,0" Style="{StaticResource BorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="15,15,15,10" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextHighBrush}" Text="Latest Rentals" />
+
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding RecentRentals}" BorderThickness="0" Style="{StaticResource {x:Type DataGrid}}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Binding="{Binding Customer.FullName}" Header="Customer" />
+                            <DataGridTextColumn Width="120" Binding="{Binding StartDate, StringFormat=d}" Header="Start Date" />
+                            <DataGridTextColumn Width="100" Binding="{Binding Status}" Header="Status" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+
+            <Border Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource BorderStyle}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Margin="15,15,15,10" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextHighBrush}" Text="Urgent Unpaid Invoices" />
+
+                    <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding UnpaidInvoices}" BorderThickness="0" Style="{StaticResource {x:Type DataGrid}}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="80" Binding="{Binding Id}" Header="Inv #" />
+                            <DataGridTextColumn Width="*" Binding="{Binding DueDate, StringFormat=d}" Header="Due Date" />
+                            <DataGridTextColumn Width="100" Binding="{Binding Total, StringFormat={}{0:C}}" Header="Amount" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+        </Grid>
+
     </Grid>
 </UserControl>

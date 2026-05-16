@@ -64,33 +64,33 @@
                     Grid.Column="0"
                     Style="{StaticResource BorderStyle}">
                     <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Foreground="{DynamicResource TextHighBrush}"
-                        Text="Available Cars: Number" />
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    FontSize="18"
+    Foreground="{DynamicResource TextHighBrush}"
+    Text="{Binding AvailableCars, StringFormat='Available Cars: {0}'}" />
                 </Border>
                 <Border
                     Grid.Row="1"
                     Grid.Column="0"
                     Style="{StaticResource BorderStyle}">
                     <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Foreground="{DynamicResource TextHighBrush}"
-                        Text="Available Motorcycles: Number" />
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    FontSize="18"
+    Foreground="{DynamicResource TextHighBrush}"
+    Text="{Binding AvailableMotorcycles, StringFormat='Available Motorcycles: {0}'}" />
                 </Border>
                 <Border
                     Grid.Row="0"
                     Grid.Column="1"
                     Style="{StaticResource BorderStyle}">
                     <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Foreground="{DynamicResource TextHighBrush}"
-                        Text="Active Rentals: Number" />
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    FontSize="18"
+    Foreground="{DynamicResource TextHighBrush}"
+    Text="{Binding ActiveRentals, StringFormat='Active Rentals: {0}'}" />
                 </Border>
 
                 <Border
@@ -98,11 +98,11 @@
                     Grid.Column="2"
                     Style="{StaticResource BorderStyle}">
                     <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Foreground="{DynamicResource TextHighBrush}"
-                        Text="Revenue Today: Number" />
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    FontSize="18"
+    Foreground="{DynamicResource TextHighBrush}"
+    Text="{Binding RevenueToday, StringFormat='Revenue Today: {0:C}'}" />
                 </Border>
 
                 <Border
@@ -110,11 +110,11 @@
                     Grid.Column="2"
                     Style="{StaticResource BorderStyle}">
                     <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Foreground="{DynamicResource TextHighBrush}"
-                        Text="Total Customers: Number" />
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    FontSize="18"
+    Foreground="{DynamicResource TextHighBrush}"
+    Text="{Binding OverdueRentals, StringFormat='Overdue Rentals: {0}'}" />
                 </Border>
 
                 <Border
@@ -122,11 +122,11 @@
                     Grid.Column="1"
                     Style="{StaticResource BorderStyle}">
                     <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="18"
-                        Foreground="{DynamicResource TextHighBrush}"
-                        Text="Overdue Rentals: Number" />
+    HorizontalAlignment="Center"
+    VerticalAlignment="Center"
+    FontSize="18"
+    Foreground="{DynamicResource TextHighBrush}"
+    Text="{Binding TotalCustomers, StringFormat='Total Customers: {0}'}" />
                 </Border>
 
 

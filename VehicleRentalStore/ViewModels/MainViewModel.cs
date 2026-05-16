@@ -137,7 +137,7 @@ namespace VehicleRentalStore.ViewModels
 
             if (role == EmployeeRole.Staff || role == EmployeeRole.Manager)
             {
-                MenuItems.Add(new NavigationItem { Title = "Dashboard", IconPath = "\xE7C6", TargetViewModel = typeof(DashboardViewModel) });
+                
 
                 // --- CUSTOMERS GROUP ---
                 var customersMenu = new NavigationItem
@@ -165,7 +165,8 @@ namespace VehicleRentalStore.ViewModels
 
             if (role == EmployeeRole.Manager)
             {
-                MenuItems.Add(new NavigationItem { Title = "Settings", IconPath = "\xE713", TargetViewModel = typeof(SettingViewModel) });
+                
+                MenuItems.Add(new NavigationItem { Title = "Dashboard", IconPath = "\xE7C6", TargetViewModel = typeof(DashboardViewModel) });
             }
 
             if (MenuItems.Count > 0)

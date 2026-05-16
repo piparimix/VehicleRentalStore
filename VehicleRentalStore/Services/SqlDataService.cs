@@ -33,6 +33,16 @@ namespace VehicleRentalStore.Services
             using var context = await _contextFactory.CreateDbContextAsync();
             return await context.Set<Customer>().ToListAsync();
         }
+        public async Task<List<Rental>> GetAllRentalsAsync()
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+            return await context.Set<Rental>().ToListAsync();
+        }
 
+        public async Task<List<Invoice>> GetAllInvoicesAsync()
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+            return await context.Set<Invoice>().ToListAsync();
+        }
     }
 }
