@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="VehicleRentalStore.Components.CustomTitleBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="32">
+
+    <Border Background="{DynamicResource PanelBackgroundBrush}" 
+            BorderBrush="{DynamicResource BorderBrush}" 
+            BorderThickness="0,0,0,1"
+            MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+
+        <Grid>
+            <TextBlock Text="My Application" 
+                       VerticalAlignment="Center" 
+                       Margin="10,0,0,0" 
+                       Foreground="{DynamicResource TextHighBrush}" 
+                       FontWeight="Bold"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="&#xE921;"
+                        Width="45" 
+                        Style="{DynamicResource TitleBarButtonStyle}"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        Click="Minimize_Click"/>
+
+                <Button Content="&#xE922;"
+                        Width="45" 
+                        Style="{DynamicResource TitleBarButtonStyle}"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        Click="Maximize_Click"/>
+
+                <Button Content="&#xE8BB;"
+                        Width="45" 
+                        Style="{DynamicResource TitleBarCloseButtonStyle}"
+                        WindowChrome.IsHitTestVisibleInChrome="True"
+                        Click="Close_Click"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

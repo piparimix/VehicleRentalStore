@@ -1,0 +1,170 @@
+﻿<UserControl
+    x:Class="VehicleRentalStore.Views.SettingsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:VehicleRentalStore.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="800"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid Margin="20" Background="{DynamicResource AppBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,0,0,20"
+            FontSize="24"
+            FontWeight="Bold"
+            Foreground="{DynamicResource TextHighBrush}"
+            Text="Järjestelmän asetukset" />
+
+        <ScrollViewer
+            Grid.Row="1"
+            Padding="0,0,15,0"
+            VerticalScrollBarVisibility="Auto">
+
+            <StackPanel Margin="0,10,0,0">
+
+                <TextBlock Margin="0,0,0,10" FontWeight="Bold" Foreground="{DynamicResource TextHighBrush}" Text="Yleiset tiedot" />
+                <Border Margin="0,0,0,25" Padding="20" Style="{StaticResource BorderStyle}">
+                    <StackPanel>
+                        <TextBlock Margin="0,0,0,5" FontSize="12" Opacity="0.7" Foreground="{DynamicResource TextHighBrush}" Text="Yrityksen nimi" />
+                        <TextBox
+                            x:Name="TxtYrityksenNimi"
+                            Height="35"
+                            Margin="0,0,0,15"
+                            Text="{Binding CompanyName, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBlock Margin="0,0,0,5" FontSize="12" Opacity="0.7" Foreground="{DynamicResource TextHighBrush}" Text="Nykyinen käyttäjä" />
+                        <TextBox
+                            Height="35"
+                            IsReadOnly="True"
+                            Text="{Binding UserName, Mode=OneWay}" />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Margin="0,0,0,10" FontWeight="Bold" Foreground="{DynamicResource TextHighBrush}" Text="Omat asetukset" />
+                <Border Margin="0,0,0,25" Padding="20" Style="{StaticResource BorderStyle}">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource TextHighBrush}" Text="Oletustoimipiste (Default Branch)" />
+                                <TextBlock Margin="0,5,0,0" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" Text="Valitse toimipiste, joka on oletuksena valittuna uusia varauksia tehdessä." />
+                            </StackPanel>
+                            <ComboBox Grid.Column="1" Height="35" SelectedIndex="0">
+                                <ComboBoxItem Content="Joensuu Keskusta" />
+                                <ComboBoxItem Content="Helsinki-Vantaa Lentoasema" />
+                                <ComboBoxItem Content="Tampere Rautatieasema" />
+                                <ComboBoxItem Content="Rovaniemi Napapiiri" />
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource TextHighBrush}" Text="Kieli (Language)" />
+                                <TextBlock Margin="0,5,0,0" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" Text="Vaihda käyttöliittymän kieltä." />
+                            </StackPanel>
+                            <ComboBox Grid.Column="1" Height="35" SelectedIndex="0">
+                                <ComboBoxItem Content="Suomi" />
+                                <ComboBoxItem Content="English" />
+                            </ComboBox>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Margin="0,0,0,10" FontWeight="Bold" Foreground="{DynamicResource TextHighBrush}" Text="Ilmoitukset" />
+                <Border Margin="0,0,0,25" Padding="20" Style="{StaticResource BorderStyle}">
+                    <StackPanel>
+                        <CheckBox Margin="0,0,0,10" Content="Sähköposti-ilmoitukset uusista verkkovarauksista" IsChecked="True" />
+                        <CheckBox Margin="0,0,0,10" Content="Varoita myöhästyneistä palautuksista (Overdue alerts)" IsChecked="True" />
+                        <CheckBox Content="Näytä huoltomuistutukset kojelaudalla (Maintenance alerts)" IsChecked="True" />
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Margin="0,0,0,10" FontWeight="Bold" Foreground="{DynamicResource TextHighBrush}" Text="Ulkoasu" />
+                <Border Margin="0,0,0,25" Padding="20" Style="{StaticResource BorderStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource TextHighBrush}" Text="Sovelluksen Teema" />
+                            <TextBlock Margin="0,5,0,0" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" Text="Vaihda tumman ja vaalean käyttöliittymän välillä." />
+                        </StackPanel>
+
+                        <Button
+                            Grid.Column="1"
+                            Height="40"
+                            Padding="20,0"
+                            Command="{Binding DataContext.ToggleThemeCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                            Style="{StaticResource {x:Type Button}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="0,0,8,0" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE771;" />
+                                <TextBlock VerticalAlignment="Center" FontWeight="SemiBold" Text="Vaihda Teemaa" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Border>
+
+                <TextBlock Margin="0,0,0,10" FontWeight="Bold" Foreground="{DynamicResource TextHighBrush}" Text="Turvallisuus" />
+                <Border Margin="0,0,0,25" Padding="20" Style="{StaticResource BorderStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock FontWeight="SemiBold" Foreground="{DynamicResource TextHighBrush}" Text="Salasana" />
+                            <TextBlock Margin="0,5,0,0" FontSize="12" Foreground="{DynamicResource TextMutedBrush}" Text="Päivitä tilisi salasana säännöllisesti turvallisuuden takaamiseksi." />
+                        </StackPanel>
+                        <Button
+                            Grid.Column="1"
+                            Height="40"
+                            Padding="20,0"
+                            Background="Transparent"
+                            BorderThickness="1"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            Foreground="{DynamicResource TextHighBrush}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="0,0,8,0" VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" Text="&#xE72E;" />
+                                <TextBlock VerticalAlignment="Center" FontWeight="SemiBold" Text="Vaihda salasana" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="2" Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button
+                Width="120"
+                Height="40"
+                Margin="0,0,15,0"
+                Content="Peruuta"
+                Style="{StaticResource ErrorButtonStyle}" />
+            <Button
+                Width="120"
+                Height="40"
+                Content="Tallenna"
+                FontWeight="Bold"
+                Style="{StaticResource SuccessButtonStyle}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

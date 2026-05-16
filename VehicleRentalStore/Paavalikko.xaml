@@ -1,0 +1,186 @@
+﻿<Window
+    x:Class="VehicleRentalStore.Paavalikko"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:components="clr-namespace:VehicleRentalStore.Components"
+    xmlns:viewmodels="clr-namespace:VehicleRentalStore.ViewModels"
+    xmlns:views="clr-namespace:VehicleRentalStore.Views"
+    Title="Paavalikko"
+    Width="1000"
+    Height="600"
+    Style="{StaticResource {x:Type Window}}"
+    WindowStyle="None">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+            <views:HomeView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
+            <views:DashboardView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:SettingViewModel}">
+            <views:SettingsView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:RegisterCustomerViewModel}">
+            <views:RegisterCustomerView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:RegisterVehicleViewModel}">
+            <views:RegisterVehicleView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:VehicleListViewModel}">
+            <views:VehicleListView />
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <components:CustomTitleBar Grid.Row="0" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Column="0"
+                Background="{DynamicResource PanelBackgroundBrush}"
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="0,0,1,0">
+
+                <Grid Margin="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                        <TextBlock
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource TextHighBrush}"
+                            Text="{Binding CompanyName}" />
+                        <TextBlock
+                            FontSize="12"
+                            Foreground="{DynamicResource TextMutedBrush}"
+                            Text="{Binding UserName}" />
+                    </StackPanel>
+
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                FontSize="11"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource TextMutedBrush}"
+                                Text="PAGES" />
+
+                            <ItemsControl ItemsSource="{Binding MenuItems}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel>
+
+                                            <Button
+                                                Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                CommandParameter="{Binding TargetViewModel}"
+                                                Tag="{Binding TargetViewModel}">
+                                                <Button.Style>
+                                                    <Style BasedOn="{StaticResource SidebarButtonStyle}" TargetType="Button">
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding HasChildren}" Value="True">
+                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock
+                                                        Margin="0,0,10,0"
+                                                        VerticalAlignment="Center"
+                                                        FontFamily="Segoe MDL2 Assets"
+                                                        Text="{Binding IconPath}" />
+                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Title}" />
+                                                </StackPanel>
+                                            </Button>
+
+                                            <StackPanel>
+                                                <StackPanel.Style>
+                                                    <Style TargetType="StackPanel">
+                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding HasChildren}" Value="True">
+                                                                <Setter Property="Visibility" Value="Visible" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </StackPanel.Style>
+
+                                                <ToggleButton IsChecked="{Binding IsExpanded, Mode=TwoWay}" Style="{StaticResource SidebarToggleButtonStyle}">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock
+                                                            Margin="0,0,10,0"
+                                                            FontFamily="Segoe MDL2 Assets"
+                                                            Text="{Binding IconPath}" />
+                                                        <TextBlock Text="{Binding Title}" />
+                                                    </StackPanel>
+                                                </ToggleButton>
+
+                                                <ItemsControl Margin="20,0,0,8" ItemsSource="{Binding Children}">
+                                                    <ItemsControl.Style>
+                                                        <Style TargetType="ItemsControl">
+                                                            <Setter Property="Visibility" Value="Collapsed" />
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsExpanded}" Value="True">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ItemsControl.Style>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <Button
+                                                                Margin="0,2"
+                                                                Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                                CommandParameter="{Binding TargetViewModel}"
+                                                                Style="{StaticResource SidebarButtonStyle}"
+                                                                Tag="{Binding TargetViewModel}">
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock
+                                                                        Margin="0,0,10,0"
+                                                                        VerticalAlignment="Center"
+                                                                        FontFamily="Segoe MDL2 Assets"
+                                                                        Text="{Binding IconPath}" />
+                                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Title}" />
+                                                                </StackPanel>
+                                                            </Button>
+                                                        </DataTemplate>
+                                                    </ItemsControl.ItemTemplate>
+                                                </ItemsControl>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </Grid>
+            </Border>
+
+            <ContentControl
+                Grid.Column="1"
+                Margin="20"
+                Content="{Binding CurrentViewModel}" />
+        </Grid>
+    </Grid>
+</Window>
