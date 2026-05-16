@@ -113,16 +113,6 @@ namespace VehicleRentalStore.ViewModels
 
             ThemeManager.ApplyTheme("DarkTheme");
 
-            // Mock login to trigger the menu generation
-            CurrentUser = new Employee
-            {
-                FirstName = "Jesse",
-                LastName = "Mikkonen",
-                Email = "test@test.fi",
-                PhoneNumber = "123",
-                Address = "Test",
-                Role = EmployeeRole.Staff
-            };
         }
 
         private void WireUpNavigation(object viewModel)

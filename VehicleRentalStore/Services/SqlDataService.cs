@@ -22,5 +22,11 @@ namespace VehicleRentalStore.Services
             // Fetch all vehicles of the specified type and return them as a list
             return await context.Set<T>().ToListAsync();
         }
+
+        public async Task<Employee?> GetEmployeeByEmailAsync(string email)
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+            return await context.Set<Employee>().FirstOrDefaultAsync(e => e.Email == email);
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace VehicleRentalStore.Services
     public interface IDataService
     {
         Task<List<T>> GetAllAsync<T>() where T : Vehicle;
+        Task<Employee?> GetEmployeeByEmailAsync(string email);
     }
 }

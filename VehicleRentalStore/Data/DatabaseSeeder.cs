@@ -75,6 +75,45 @@ namespace VehicleRentalStore.Data
             context.Customers.AddRange(customers);
 
             // 4. Generate Employees
+
+            var testStaff = new Employee
+            {
+                FirstName = "Testi",
+                LastName = "Staff",
+                Email = "a",
+                PhoneNumber = "050 1111111",
+                Address = "123 Staff Street",
+                Role = EmployeeRole.Staff,
+                DateCreated = DateTime.UtcNow,
+                PasswordHash = "a"
+            };
+
+            var testManager = new Employee
+            {
+                FirstName = "Testi",
+                LastName = "Admin",
+                Email = "b",
+                PhoneNumber = "050 2222222",
+                Address = "123 Admin Street",
+                Role = EmployeeRole.Manager, // Assuming your enum uses 'Manager' for Admin
+                DateCreated = DateTime.UtcNow,
+                PasswordHash = "b"
+            };
+
+            var testMaintenance = new Employee
+            {
+                FirstName = "Testi",
+                LastName = "Huolto",
+                Email = "c",
+                PhoneNumber = "050 3333333",
+                Address = "123 Wrench Avenue",
+                Role = EmployeeRole.Maintenance,
+                DateCreated = DateTime.UtcNow,
+                PasswordHash = "c"
+            };
+
+            context.Employees.AddRange(testStaff, testManager, testMaintenance);
+
             var employeeFaker = new Faker<Employee>(locale)
                 .RuleFor(e => e.FirstName, f => f.Name.FirstName())
                 .RuleFor(e => e.LastName, f => f.Name.LastName())
