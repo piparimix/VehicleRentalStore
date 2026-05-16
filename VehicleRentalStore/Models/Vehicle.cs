@@ -28,7 +28,7 @@ namespace VehicleRentalStore.Models
         public required string Description { get; set; }
         public int? IncludedKilometersPerDay { get; set; }
         public decimal ExtraKilometerRate { get; set; }
-        public string FullName() => $"{Brand} {Model} ({ManufactureYear})".Trim();
+        public string FullName => $"{Brand} {Model} ({ManufactureYear})".Trim();
         public string VehicleType => this is Car ? "Car" : (this is Motorcycle ? "Motorcycle" : "Other");
 
         private readonly List<MaintenanceLog> _maintenanceHistory = new();

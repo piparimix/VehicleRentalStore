@@ -146,10 +146,11 @@ namespace VehicleRentalStore.ViewModels
                     IconPath = "\xE71D",
                     OnExpanded = CloseOtherMenus
                 };
-                // UPDATE THIS LINE:
                 customersMenu.Children.Add(new NavigationItem { Title = "Customer List", IconPath = "\xE710", TargetViewModel = typeof(CustomerListViewModel) });
-                customersMenu.Children.Add(new NavigationItem { Title = "Register New", IconPath = "\xE710", TargetViewModel = typeof(RegisterCustomerViewModel) });
+                customersMenu.Children.Add(new NavigationItem { Title = "Register New", IconPath = "\xE710", TargetViewModel = typeof(RegisterCustomerViewModel) });           
                 MenuItems.Add(customersMenu);
+
+                MenuItems.Add(new NavigationItem { Title = "Rentals", IconPath = "\xE8C3", TargetViewModel = typeof(CreateRentalViewModel) });
 
                 // --- VEHICLES GROUP ---
                 var vehiclesMenu = new NavigationItem

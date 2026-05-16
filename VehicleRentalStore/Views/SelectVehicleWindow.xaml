@@ -1,0 +1,37 @@
+﻿<Window x:Class="VehicleRentalStore.Views.SelectVehicleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Select a Vehicle" Height="450" Width="700"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource AppBackgroundBrush}">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Available Vehicles" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <DataGrid Grid.Row="1" x:Name="VehicleDataGrid" 
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True" 
+                  SelectionMode="Single"
+                  HeadersVisibility="Column"
+                  RowBackground="{DynamicResource ControlBackgroundBrush}"
+                  AlternatingRowBackground="{DynamicResource PanelBackgroundBrush}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="*" />
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="*" />
+                <DataGridTextColumn Header="Year" Binding="{Binding ManufactureYear}" Width="80" />
+                <DataGridTextColumn Header="License Plate" Binding="{Binding LicensePlate}" Width="120" />
+                <DataGridTextColumn Header="Type" Binding="{Binding VehicleType}" Width="100" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Content="Cancel" Width="80" Height="30" Margin="0,0,10,0" Click="CancelButton_Click"/>
+            <Button Content="Select" Width="80" Height="30" Click="SelectButton_Click" Style="{StaticResource SuccessButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</Window>

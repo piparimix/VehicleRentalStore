@@ -16,5 +16,9 @@ namespace VehicleRentalStore.Services
         Task<List<Customer>> GetAllCustomersAsync();
         Task<List<Rental>> GetAllRentalsAsync();
         Task<List<Invoice>> GetAllInvoicesAsync();
+        Task AddRentalAsync(Rental rental);
+        Task<List<Location>> GetAllLocationsAsync();
+        Task<List<Vehicle>> GetAvailableVehiclesAsync(DateTime startDate, DateTime endDate);
+        Task<List<InsurancePlan>> GetAllInsurancePlansAsync();
     }
 }

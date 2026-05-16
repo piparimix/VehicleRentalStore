@@ -44,5 +44,32 @@ namespace VehicleRentalStore.Services
             using var context = await _contextFactory.CreateDbContextAsync();
             return await context.Set<Invoice>().ToListAsync();
         }
+        public async Task AddRentalAsync(Rental rental)
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+            context.Set<Rental>().Add(rental);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<List<Location>> GetAllLocationsAsync()
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+            return await context.Set<Location>().ToListAsync();
+        }
+
+        public async Task<List<Vehicle>> GetAvailableVehiclesAsync(DateTime startDate, DateTime endDate)
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+
+            // TODO: We will need to add logic here later to filter out vehicles 
+            // that are already booked during these dates. 
+            // For now, this returns all vehicles to clear the compiler error.
+            return await context.Set<Vehicle>().ToListAsync();
+        }
+        public async Task<List<InsurancePlan>> GetAllInsurancePlansAsync()
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+            return await context.Set<InsurancePlan>().ToListAsync();
+        }
     }
 }

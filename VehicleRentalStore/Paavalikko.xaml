@@ -39,6 +39,11 @@
         <DataTemplate DataType="{x:Type viewmodels:CustomerListViewModel}">
             <views:CustomerListView />
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewmodels:CreateRentalViewModel}">
+            <views:CreateRentalView />
+        </DataTemplate>
+
     </Window.Resources>
 
     <Grid>
