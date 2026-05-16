@@ -29,7 +29,7 @@
                 FontSize="24"
                 FontWeight="Bold"
                 Foreground="{DynamicResource TextHighBrush}"
-                Text="Ajoneuvokanta (Fleet)" />
+                Text="Vehicles" />
 
             <Border
                 Grid.Column="1"
@@ -59,7 +59,7 @@
                         Background="Transparent"
                         BorderThickness="0"
                         Foreground="{DynamicResource TextMutedBrush}"
-                        Text="Etsi ajoneuvoa..." />
+                        Text="Search vehicles..." />
                 </Grid>
             </Border>
 
@@ -79,7 +79,7 @@
                     <TextBlock
                         VerticalAlignment="Center"
                         FontWeight="Bold"
-                        Text="Uusi Ajoneuvo" />
+                        Text="New Vehicle" />
                 </StackPanel>
             </Button>
         </Grid>

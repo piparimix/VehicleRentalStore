@@ -13,5 +13,6 @@ namespace VehicleRentalStore.Services
     {
         Task<List<T>> GetAllAsync<T>() where T : Vehicle;
         Task<Employee?> GetEmployeeByEmailAsync(string email);
+        Task<List<Customer>> GetAllCustomersAsync();
     }
 }

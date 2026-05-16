@@ -28,5 +28,11 @@ namespace VehicleRentalStore.Services
             using var context = await _contextFactory.CreateDbContextAsync();
             return await context.Set<Employee>().FirstOrDefaultAsync(e => e.Email == email);
         }
+        public async Task<List<Customer>> GetAllCustomersAsync()
+        {
+            using var context = await _contextFactory.CreateDbContextAsync();
+            return await context.Set<Customer>().ToListAsync();
+        }
+
     }
 }

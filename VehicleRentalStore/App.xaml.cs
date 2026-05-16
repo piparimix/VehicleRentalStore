@@ -97,6 +97,8 @@ namespace VehicleRentalStore
             services.AddTransient<VehicleListViewModel>();
             services.AddTransient<VehicleListView>();
             services.AddTransient<LogInViewModel>();
+            services.AddTransient<CustomerListViewModel>();
+            services.AddTransient<CustomerListView>();
 
             // Fixed casing to match your class name perfectly
             services.AddTransient<LogInWindow>();
