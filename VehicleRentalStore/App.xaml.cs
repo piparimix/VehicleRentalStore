@@ -28,27 +28,8 @@ namespace VehicleRentalStore
 
                 InitializeDatabase();
 
-                Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
-
-                var loginWindow = ServiceProvider.GetRequiredService<LogInWindow>();
-                bool? loginSuccess = loginWindow.ShowDialog();
-
-                if (loginSuccess == true && loginWindow.AuthenticatedUser != null)
-                {
-                    var mainWindow = ServiceProvider.GetRequiredService<Paavalikko>();
-
-                    var mainVm = (MainViewModel)mainWindow.DataContext;
-                    mainVm.CurrentUser = loginWindow.AuthenticatedUser;
-                    Current.MainWindow = mainWindow;
-                    Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-
-                    mainWindow.Show();
-                }
-                else
-                {
-                    // If they cancelled or closed the login window, manually exit
-                    Current.Shutdown();
-                }
+                // Call the new method instead of having the logic here
+                StartSession();
             }
             catch (Exception ex)
             {
@@ -60,7 +41,30 @@ namespace VehicleRentalStore
                 Current.Shutdown();
             }
         }
+        public void StartSession()
+        {
+            // Keep app alive while dialog is open
+            Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
+            var loginWindow = ServiceProvider.GetRequiredService<LogInWindow>();
+            bool? loginSuccess = loginWindow.ShowDialog();
+
+            if (loginSuccess == true && loginWindow.AuthenticatedUser != null)
+            {
+                var mainWindow = ServiceProvider.GetRequiredService<Paavalikko>();
+
+                var mainVm = (MainViewModel)mainWindow.DataContext;
+                mainVm.CurrentUser = loginWindow.AuthenticatedUser;
+                Current.MainWindow = mainWindow;
+                Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+
+                mainWindow.Show();
+            }
+            else
+            {
+                Current.Shutdown();
+            }
+        }
         private void InitializeDatabase()
         {
             var factory = ServiceProvider.GetRequiredService<IDbContextFactory<VehicleRentalDbContext>>();

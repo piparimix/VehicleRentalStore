@@ -93,6 +93,8 @@ namespace VehicleRentalStore.ViewModels
 
         public ICommand ToggleThemeCommand { get; }
         public ICommand NavigateCommand { get; }
+        public ICommand LogoutCommand { get; }
+        public Action? OnLogout { get; set; }
 
         public MainViewModel()
         {
@@ -112,7 +114,7 @@ namespace VehicleRentalStore.ViewModels
             });
 
             ThemeManager.ApplyTheme("DarkTheme");
-
+            LogoutCommand = new RelayCommand(_ => OnLogout?.Invoke());
         }
 
         private void WireUpNavigation(object viewModel)
